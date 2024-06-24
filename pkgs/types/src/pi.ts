@@ -1,6 +1,7 @@
 export type InterfaceId = string & { __brand: 'InterfaceId' }
 
 export type InterfaceInfo = {
+  name: string
   path: string
 }
 

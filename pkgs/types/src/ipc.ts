@@ -6,6 +6,7 @@ export type InvokeMain = {
   Pi_New: () => InterfaceId | null
   Pi_Info: (id: InterfaceId) => InterfaceInfo | null
   Pi_Get: (id: InterfaceId) => Interface | null
+  Pi_List: () => InterfaceId[]
 }
 
 export type NotifyRender = {

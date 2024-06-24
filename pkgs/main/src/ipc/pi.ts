@@ -16,13 +16,14 @@ export function setupPiIpc() {
       title: 'select interface',
       properties: ['openDirectory']
     })
-    if (result.filePaths) {
+    if (!result.canceled && result.filePaths.length > 0) {
       const p = result.filePaths[0]
       if (!existsSync(path.join(p, 'interface.json'))) {
         return null
       }
       const id = v4() as InterfaceId
       piIndex[id] = {
+        name: path.basename(p),
         path: p
       }
       return id
@@ -45,5 +46,9 @@ export function setupPiIpc() {
     } catch (_) {
       return null
     }
+  })
+
+  IpcHandle('Pi_List', () => {
+    return Object.keys(piIndex) as InterfaceId[]
   })
 }

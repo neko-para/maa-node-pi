@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
 
+import PiManager from './comps/PiManager.vue'
+
 const maaVer = ref('')
 
 onMounted(() => {
@@ -16,5 +18,6 @@ function addInterface() {
 
 <template>
   <div>Hello world! Maa: {{ maaVer }}</div>
-  <button @click="addInterface">add interface</button>
+  <v-btn @click="addInterface">add interface</v-btn>
+  <pi-manager></pi-manager>
 </template>
