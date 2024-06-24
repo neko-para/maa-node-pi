@@ -1,0 +1,8 @@
+{
+  "name": "maa-node-pi-types",
+  "main": "src/main.ts",
+  "devDependencies": {
+    "@tsconfig/node20": "^20.1.4",
+    "typescript": "^5.5.2"
+  }
+}

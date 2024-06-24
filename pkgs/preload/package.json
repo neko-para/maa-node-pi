@@ -1,5 +1,5 @@
 {
-  "name": "maa-node-template-preload",
+  "name": "maa-node-pi-preload",
   "type": "module",
   "devDependencies": {
     "@vue/tsconfig": "^0.5.1",
