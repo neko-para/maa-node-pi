@@ -11,7 +11,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <VCard>
+  <v-card>
     <v-list> </v-list>
-  </VCard>
+  </v-card>
 </template>
