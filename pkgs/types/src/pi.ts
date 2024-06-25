@@ -61,3 +61,24 @@ export type Interface = {
   version?: string
   message?: string
 }
+
+export type InterfaceConfig = {
+  controller: {
+    name: string
+    type: 'Adb' | 'Win32'
+  }
+  adb?: {
+    adb_path: string
+    address: string
+    config: unknown
+  }
+  win32?: {}
+  resource: string
+  task: {
+    name: string
+    option?: {
+      name: string
+      value: string
+    }[]
+  }[]
+}

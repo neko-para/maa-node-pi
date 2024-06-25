@@ -1,4 +1,4 @@
-import { Interface, InterfaceId, InterfaceInfo } from './pi'
+import { Interface, InterfaceConfig, InterfaceId, InterfaceInfo } from './pi'
 
 export type InvokeMain = {
   MaaVersion: () => string
@@ -7,6 +7,8 @@ export type InvokeMain = {
   Pi_Info: (id: InterfaceId) => InterfaceInfo | null
   Pi_Get: (id: InterfaceId) => Interface | null
   Pi_List: () => InterfaceId[]
+  Pi_GetConfig: (id: InterfaceId) => InterfaceConfig | null
+  Pi_SetConfig: (id: InterfaceId, cfg: InterfaceConfig) => void
 }
 
 export type NotifyRender = {

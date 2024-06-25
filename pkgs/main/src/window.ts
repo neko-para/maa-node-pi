@@ -22,6 +22,9 @@ export function createWindow() {
       `http://${process.env.VITE_DEV_SERVER_HOST}:${process.env.VITE_DEV_SERVER_PORT}`
     )
     mainWindow.webContents.on('did-frame-finish-load', () => {
+      mainWindow.webContents.openDevTools({
+        mode: 'detach'
+      })
       // useDebug(mainWindow)
     })
   }

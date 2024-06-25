@@ -10,7 +10,30 @@ import { IpcHandle } from './helper'
 
 const piIndex: Record<InterfaceId, InterfaceInfo> = {}
 
+function writeCfg() {
+  fs.writeFile('pi.json', JSON.stringify(piIndex, null, 2))
+}
+
+async function readCfg() {
+  if (!existsSync('pi.json')) {
+    return
+  }
+  const buf = await fs.readFile('pi.json', 'utf8')
+  Object.assign(piIndex, JSON.parse(buf))
+}
+
+function nameOfPath(p: string) {
+  let name = path.basename(p)
+  while (['install'].includes(name)) {
+    p = path.dirname(p)
+    name = path.basename(p)
+  }
+  return name
+}
+
 export function setupPiIpc() {
+  readCfg()
+
   IpcHandle('Pi_New', async () => {
     const result = await dialog.showOpenDialog(mainWindow, {
       title: 'select interface',
@@ -23,9 +46,10 @@ export function setupPiIpc() {
       }
       const id = v4() as InterfaceId
       piIndex[id] = {
-        name: path.basename(p),
+        name: nameOfPath(p),
         path: p
       }
+      writeCfg()
       return id
     } else {
       return null
@@ -50,5 +74,32 @@ export function setupPiIpc() {
 
   IpcHandle('Pi_List', () => {
     return Object.keys(piIndex) as InterfaceId[]
+  })
+
+  IpcHandle('Pi_GetConfig', async id => {
+    const info = piIndex[id]
+    if (!info) {
+      return null
+    }
+    const cfgPath = path.join(info.path, 'config', 'maa_pi_config.json')
+    if (!existsSync(cfgPath)) {
+      return null
+    }
+    try {
+      const content = await fs.readFile(cfgPath, 'utf8')
+      return JSON.parse(content)
+    } catch (_) {
+      return null
+    }
+  })
+
+  IpcHandle('Pi_SetConfig', async (id, cfg) => {
+    const info = piIndex[id]
+    if (!info) {
+      return
+    }
+    const cfgPath = path.join(info.path, 'config', 'maa_pi_config.json')
+    await fs.mkdir(path.dirname(cfgPath), { recursive: true })
+    await fs.writeFile(cfgPath, JSON.stringify(cfg, null, 4))
   })
 }
