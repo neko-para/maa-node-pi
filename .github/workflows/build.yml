@@ -48,8 +48,8 @@ jobs:
 
       - name: Compile Electron app
         run: |
-          pnpm run build
-          pnpm run package -- --arch=${{ matrix.arch }}
+          npm run build
+          npm run package -- --arch=${{ matrix.arch }}
           mkdir -p pkg
 
       - name: Package app
