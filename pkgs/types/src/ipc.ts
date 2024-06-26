@@ -1,14 +1,17 @@
+import type * as maa from '@nekosu/maa-node'
+
 import { Interface, InterfaceConfig, InterfaceId, InterfaceInfo } from './pi'
 
 export type InvokeMain = {
-  MaaVersion: () => string
-
   Pi_New: () => InterfaceId | null
   Pi_Info: (id: InterfaceId) => InterfaceInfo | null
   Pi_Get: (id: InterfaceId) => Interface | null
   Pi_List: () => InterfaceId[]
   Pi_GetConfig: (id: InterfaceId) => InterfaceConfig | null
   Pi_SetConfig: (id: InterfaceId, cfg: InterfaceConfig) => void
+
+  Maa_Version: () => string
+  Maa_AdbScan: () => (maa.AdbInfo & { name: string })[]
 }
 
 export type NotifyRender = {

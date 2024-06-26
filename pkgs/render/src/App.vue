@@ -18,7 +18,7 @@ const maaVer = ref('')
 const showPiManager = ref(false)
 
 onMounted(() => {
-  ipc.invoke('MaaVersion').then(ver => {
+  ipc.invoke('Maa_Version').then(ver => {
     maaVer.value = ver
   })
 })
