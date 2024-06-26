@@ -15,26 +15,24 @@ import { piCurrentCfg, piCurrentData } from '../states/pi'
 
 const controllerTarget = computed<string>({
   set(v) {
-    if (piCurrentCfg.value && piCurrentData.value) {
-      const info = piCurrentData.value.controller.find(x => x.name === v)
-      if (info) {
-        piCurrentCfg.value.controller = {
-          name: info.name,
-          type: info.type
-        }
-        delete piCurrentCfg.value.adb
-        delete piCurrentCfg.value.win32
+    const info = piCurrentData.value.controller?.find(x => x.name === v)
+    if (info) {
+      piCurrentCfg.value.controller = {
+        name: info.name,
+        type: info.type
       }
+      delete piCurrentCfg.value.adb
+      delete piCurrentCfg.value.win32
     }
   },
   get() {
-    return piCurrentCfg.value?.controller.name ?? ''
+    return piCurrentCfg.value.controller?.name ?? ''
   }
 })
 
 const controllerTargetInfo = computed(() => {
   return (
-    piCurrentData.value?.controller.find(x => x.name === piCurrentCfg.value?.controller.name) ??
+    piCurrentData.value.controller?.find(x => x.name === piCurrentCfg.value.controller?.name) ??
     null
   )
 })
@@ -58,13 +56,13 @@ async function adbPerformSave() {
     return
   }
   const info = adbInfo.value[adbInfoIdx.value]
-  if (piCurrentCfg.value) {
-    piCurrentCfg.value.adb = {
-      adb_path: info.adb_path,
-      address: info.adb_serial,
-      config: info.adb_config
-    }
+
+  piCurrentCfg.value.adb = {
+    adb_path: info.adb_path,
+    address: info.adb_serial,
+    config: JSON.parse(info.adb_config)
   }
+
   showAdbSelelector.value = false
 }
 </script>
@@ -92,21 +90,23 @@ async function adbPerformSave() {
     </v-card>
   </v-dialog>
 
-  <v-card v-if="piCurrentData && piCurrentCfg">
+  <v-card>
     <v-card-title> Controller </v-card-title>
     <v-card-text>
       <v-select
-        :items="piCurrentData.controller.map(x => x.name)"
+        :items="(piCurrentData.controller ?? []).map(x => x.name)"
         v-model="controllerTarget"
         hide-details
       ></v-select>
     </v-card-text>
     <v-card-actions v-if="controllerTargetInfo">
       <template v-if="controllerTargetInfo.type === 'Adb'">
-        <span class="text-body-1">
-          {{ piCurrentCfg.adb ? `${piCurrentCfg.adb.address} - ${piCurrentCfg.adb.adb_path}` : '' }}
-        </span>
-        <v-btn @click="showAdbSelelector = true"> reconfigure </v-btn>
+        <v-btn @click="showAdbSelelector = true">
+          reconfigure
+          {{
+            piCurrentCfg.adb ? ` - ${piCurrentCfg.adb.address} - ${piCurrentCfg.adb.adb_path}` : ''
+          }}
+        </v-btn>
       </template>
     </v-card-actions>
   </v-card>

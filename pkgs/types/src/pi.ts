@@ -6,7 +6,7 @@ export type InterfaceInfo = {
 }
 
 export type Interface = {
-  controller: {
+  controller?: {
     name: string
     type: 'Adb' | 'Win32'
     adb?: {
@@ -24,11 +24,11 @@ export type Interface = {
       screencap?: number
     }
   }[]
-  resource: {
+  resource?: {
     name: string
     path: string[]
   }[]
-  task: {
+  task?: {
     name: string
     entry: string
     param?: unknown
@@ -44,14 +44,14 @@ export type Interface = {
       default_case?: string
     }
   >
-  recognizer: Record<
+  recognizer?: Record<
     string,
     {
       exec_path: string
       exec_param?: string[]
     }
   >
-  action: Record<
+  action?: Record<
     string,
     {
       exec_path: string
@@ -63,7 +63,7 @@ export type Interface = {
 }
 
 export type InterfaceConfig = {
-  controller: {
+  controller?: {
     name: string
     type: 'Adb' | 'Win32'
   }
@@ -73,8 +73,8 @@ export type InterfaceConfig = {
     config: unknown
   }
   win32?: {}
-  resource: string
-  task: {
+  resource?: string
+  task?: {
     name: string
     option?: {
       name: string

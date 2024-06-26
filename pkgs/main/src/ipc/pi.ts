@@ -62,13 +62,13 @@ export function setupPiIpc() {
 
   IpcHandle('Pi_Get', async id => {
     if (!piIndex[id]) {
-      return null
+      return {}
     }
     try {
       const content = await fs.readFile(path.join(piIndex[id].path, 'interface.json'), 'utf-8')
       return JSON.parse(content)
     } catch (_) {
-      return null
+      return {}
     }
   })
 
@@ -79,17 +79,17 @@ export function setupPiIpc() {
   IpcHandle('Pi_GetConfig', async id => {
     const info = piIndex[id]
     if (!info) {
-      return null
+      return {}
     }
     const cfgPath = path.join(info.path, 'config', 'maa_pi_config.json')
     if (!existsSync(cfgPath)) {
-      return null
+      return {}
     }
     try {
       const content = await fs.readFile(cfgPath, 'utf8')
       return JSON.parse(content)
     } catch (_) {
-      return null
+      return {}
     }
   })
 

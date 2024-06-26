@@ -5,9 +5,9 @@ import { Interface, InterfaceConfig, InterfaceId, InterfaceInfo } from './pi'
 export type InvokeMain = {
   Pi_New: () => InterfaceId | null
   Pi_Info: (id: InterfaceId) => InterfaceInfo | null
-  Pi_Get: (id: InterfaceId) => Interface | null
+  Pi_Get: (id: InterfaceId) => Interface
   Pi_List: () => InterfaceId[]
-  Pi_GetConfig: (id: InterfaceId) => InterfaceConfig | null
+  Pi_GetConfig: (id: InterfaceId) => InterfaceConfig
   Pi_SetConfig: (id: InterfaceId, cfg: InterfaceConfig) => void
 
   Maa_Version: () => string

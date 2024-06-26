@@ -11,8 +11,8 @@ import { debounce } from '../utils/debounce'
 export const piCurrent = ref<InterfaceId | null>(null)
 export const piCurrentInfo = ref<InterfaceInfo | null>(null)
 
-export const piCurrentData = ref<Interface | null>(null)
-export const piCurrentCfg = ref<InterfaceConfig | null>(null)
+export const piCurrentData = ref<Interface>({})
+export const piCurrentCfg = ref<InterfaceConfig>({})
 
 let piCurrentCfgWatchHandle: WatchStopHandle | null = null
 
@@ -41,8 +41,8 @@ watch(
       piCurrentCfgWatchHandle?.()
       piCurrentCfgWatchHandle = null
 
-      piCurrentData.value = null
-      piCurrentCfg.value = null
+      piCurrentData.value = {}
+      piCurrentCfg.value = {}
     }
   },
   {
