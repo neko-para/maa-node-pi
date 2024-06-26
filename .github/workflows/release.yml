@@ -1,0 +1,49 @@
+name: 'Release'
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - name: Download artifact
+        id: download-artifact
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          workflow: build.yml
+          workflow_conclusion: success
+          path: assets
+
+      - name: Decompress tars
+        run: |
+          TARS=`ls assets`;
+          mkdir -p unpkg;
+          cd unpkg
+          for NAME in ${TARS}; do
+            tar jxvf ../assets/${NAME}/`ls ../assets/${NAME}`;
+          done
+          cd ..
+
+      - name: Compress zips
+        run: |
+          PKGS=`ls unpkg`;
+          mkdir -p release;
+          cd unpkg
+          for NAME in ${PKGS}; do
+            zip -r -y ../release/${NAME}.zip ${NAME}
+          done
+          cd ..
+
+      - uses: softprops/action-gh-release@v1
+        with:
+          files: release/*.zip

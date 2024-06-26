@@ -1,0 +1,58 @@
+name: 'Build'
+
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - '**.md'
+      - '.vscode'
+      - '.github/workflows/release.yml'
+  workflow_dispatch:
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: ['windows-latest', 'ubuntu-latest', 'macos-latest']
+        # arch: ['amd64', 'arm64']
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: latest
+
+      - name: Use Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm i
+
+      - name: Compile Electron app
+        run: |
+          pnpm run build
+          pnpm run package
+          mkdir -p pkg
+
+      - name: Package app
+        run: |
+          tar cjvf pkg/`ls out`.tar.gz -C ./out ./`ls out`
+
+      - uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: maa-node-pi-${{ matrix.os == 'windows-latest' && 'win' || (matrix.os == 'ubuntu-latest' && 'linux' || 'macos') }}
+          path: 'pkg'
