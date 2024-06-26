@@ -43,8 +43,8 @@ jobs:
       - name: Install dependencies
         run: |
           pnpm i
-          rm -r node_modules/@nekosu/maa-node-*
           pnpm i -w @nekosu/maa-node-${{ matrix.os == 'windows-latest' && 'win32' || (matrix.os == 'ubuntu-latest' && 'linux' || 'darwin') }}-${{ matrix.arch }}
+          rm -r node_modules/@nekosu/maa-node-${{ matrix.os == 'windows-latest' && 'win32' || (matrix.os == 'ubuntu-latest' && 'linux' || 'darwin') }}-${{ matrix.arch == 'x64' && 'arm64' || 'x64' }}
 
       - name: Compile Electron app
         run: |
