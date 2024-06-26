@@ -13,6 +13,7 @@ export type InvokeMain = {
   Maa_Version: () => string
   Maa_AdbScan: () => (maa.AdbInfo & { name: string })[]
   Maa_Run: (id: InterfaceId, param: InterfaceRuntime) => boolean
+  Maa_Stop: (id: InterfaceId) => void
 }
 
 export type NotifyRender = {

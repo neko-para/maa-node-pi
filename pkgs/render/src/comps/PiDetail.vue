@@ -98,6 +98,10 @@ async function runTask() {
   ipc.off('TrivialCallback', notifyId)
   running.value = false
 }
+
+function stopTask() {
+  ipc.invoke('Maa_Stop', piCurrent.value!)
+}
 </script>
 
 <template>
@@ -119,6 +123,7 @@ async function runTask() {
     </v-card-text>
     <v-card-actions>
       <v-btn @click="runTask" :loading="running"> run </v-btn>
+      <v-btn @click="stopTask" :disabled="!running"> stop </v-btn>
     </v-card-actions>
     <v-card-text v-if="runLog.length > 0">
       <div class="flex flex-column ga-2">

@@ -129,7 +129,7 @@ function cfgTaskGet(cfg: string) {
         ></v-select>
       </v-card-text>
       <v-card-actions>
-        <v-btn @click="addTask"></v-btn>
+        <v-btn @click="addTask"> add </v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>

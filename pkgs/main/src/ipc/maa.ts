@@ -1,9 +1,12 @@
 import * as maa from '@nekosu/maa-node'
+import { InterfaceId } from 'maa-node-pi-types'
 
 import { IpcHandle, IpcNotify } from './helper'
 import { getProjectDir } from './pi'
 
 export function setupMaaIpc() {
+  const stopHandler: Record<InterfaceId, () => void> = {}
+
   IpcHandle('Maa_Version', () => {
     return maa.version()
   })
@@ -41,10 +44,20 @@ export function setupMaaIpc() {
       return false
     }
 
+    stopHandler[id] = () => {
+      inst.post_stop()
+    }
+
     for (const task of param.task) {
       await inst.post_task(task.entry, task.param as any).wait()
     }
 
+    delete stopHandler[id]
+
     return true
+  })
+
+  IpcHandle('Maa_Stop', id => {
+    stopHandler[id]?.()
   })
 }
