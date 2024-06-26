@@ -1,3 +1,5 @@
+import type * as maa from '@nekosu/maa-node'
+
 export type InterfaceId = string & { __brand: 'InterfaceId' }
 
 export type InterfaceInfo = {
@@ -80,5 +82,22 @@ export type InterfaceConfig = {
       name: string
       value: string
     }[]
+  }[]
+}
+
+export type InterfaceRuntime = {
+  controller_param:
+    | null
+    | ({ ctype: 'adb' } & maa.AdbInfo)
+    | {
+        ctype: 'win32'
+        hwnd: string
+        controller_type: number
+      }
+  resource_path: string[]
+  task: {
+    name: string
+    entry: string
+    param: unknown
   }[]
 }

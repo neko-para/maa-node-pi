@@ -1,6 +1,6 @@
 import type * as maa from '@nekosu/maa-node'
 
-import { Interface, InterfaceConfig, InterfaceId, InterfaceInfo } from './pi'
+import { Interface, InterfaceConfig, InterfaceId, InterfaceInfo, InterfaceRuntime } from './pi'
 
 export type InvokeMain = {
   Pi_New: () => InterfaceId | null
@@ -12,11 +12,14 @@ export type InvokeMain = {
 
   Maa_Version: () => string
   Maa_AdbScan: () => (maa.AdbInfo & { name: string })[]
+  Maa_Run: (id: InterfaceId, param: InterfaceRuntime) => boolean
 }
 
 export type NotifyRender = {
-  TrivialCallback: (interfaceId: InterfaceId, msg: string, detail: string) => void
+  TrivialCallback: (msg: string, detail: string) => void
 }
+
+type IpcId = { __brand: 'IpcId' }
 
 export type IpcDecl = {
   invoke: <T extends keyof InvokeMain>(
@@ -26,5 +29,6 @@ export type IpcDecl = {
   on: <T extends keyof NotifyRender>(
     msg: T,
     func: (...args: Parameters<NotifyRender[T]>) => void
-  ) => void
+  ) => IpcId
+  off: (msg: keyof NotifyRender, id: IpcId) => void
 }

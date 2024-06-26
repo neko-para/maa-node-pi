@@ -31,6 +31,10 @@ function nameOfPath(p: string) {
   return name
 }
 
+export function getProjectDir(id: InterfaceId) {
+  return piIndex[id].path
+}
+
 export function setupPiIpc() {
   readCfg()
 

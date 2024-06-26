@@ -15,7 +15,7 @@ import PiManager from './comps/PiManager.vue'
 import { piCurrentInfo } from './states/pi'
 
 const maaVer = ref('')
-const showPiManager = ref(false)
+const showPiManager = ref(true)
 
 onMounted(() => {
   ipc.invoke('Maa_Version').then(ver => {
