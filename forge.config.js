@@ -1,7 +1,6 @@
 module.exports = {
   packagerConfig: {
     ignore: path => {
-      console.log(path)
       if (path.length === 0) {
         return false
       }
