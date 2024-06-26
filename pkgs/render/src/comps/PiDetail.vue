@@ -126,7 +126,7 @@ function stopTask() {
       <v-btn @click="stopTask" :disabled="!running"> stop </v-btn>
     </v-card-actions>
     <v-card-text v-if="runLog.length > 0">
-      <div class="flex flex-column ga-2">
+      <div class="d-flex flex-column ga-2">
         <span v-for="(log, idx) of runLog" :key="idx"> {{ log[0] }} - {{ log[1] }} </span>
       </div>
     </v-card-text>

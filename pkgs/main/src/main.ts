@@ -8,7 +8,7 @@ import { createWindow } from './window'
 
 process.chdir(app.getPath('userData'))
 
-console.log(maa.version(), maa.AdbController.agent_path())
+console.log(maa.version(), maa.AdbController.agent_path(), process.cwd())
 maa.set_global_option('LogDir', '.')
 
 app.setAboutPanelOptions({

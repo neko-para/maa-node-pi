@@ -6,7 +6,7 @@ contextBridge.exposeInMainWorld('ipc', {
   },
   on: (msg: string, func: (...args: unknown[]) => void) => {
     const wrap = (e: unknown, ...args: unknown[]) => {
-      func(args)
+      func(...args)
     }
     ipcRenderer.on(msg, wrap)
     return wrap
