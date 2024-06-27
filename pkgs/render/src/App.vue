@@ -5,11 +5,13 @@ import {
   VAppBar,
   VAppBarNavIcon,
   VAppBarTitle,
+  VBtn,
   VContainer,
   VMain,
   VSpacer
 } from 'vuetify/components'
 
+import GConfig from './comps/GConfig.vue'
 import PiDetail from './comps/PiDetail.vue'
 import PiManager from './comps/PiManager.vue'
 import { piCurrentInfo } from './states/pi'
@@ -22,9 +24,13 @@ onMounted(() => {
     maaVer.value = ver
   })
 })
+
+const gConfigEl = ref<InstanceType<typeof GConfig> | null>(null)
 </script>
 
 <template>
+  <g-config ref="gConfigEl"></g-config>
+
   <v-app>
     <v-app-bar>
       <template #prepend>
@@ -34,6 +40,7 @@ onMounted(() => {
 
       <v-spacer></v-spacer>
       <span> {{ maaVer }} </span>
+      <v-btn icon="settings" @click="gConfigEl?.show()"> </v-btn>
     </v-app-bar>
     <pi-manager v-model:show="showPiManager"></pi-manager>
     <v-main>

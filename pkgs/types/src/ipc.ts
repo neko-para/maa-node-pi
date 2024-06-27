@@ -1,5 +1,6 @@
 import type * as maa from '@nekosu/maa-node'
 
+import { GlobalConfig } from './cfg'
 import { Interface, InterfaceConfig, InterfaceId, InterfaceInfo, InterfaceRuntime } from './pi'
 
 export type InvokeMain = {
@@ -14,6 +15,9 @@ export type InvokeMain = {
   Maa_AdbScan: () => (maa.AdbInfo & { name: string })[]
   Maa_Run: (id: InterfaceId, param: InterfaceRuntime) => boolean
   Maa_Stop: (id: InterfaceId) => void
+
+  G_SetConfig: (cfg: GlobalConfig) => void
+  G_GetConfig: () => GlobalConfig
 }
 
 export type NotifyRender = {
