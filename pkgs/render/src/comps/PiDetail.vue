@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { type Interface, type InterfaceConfig, type InterfaceRuntime } from 'maa-node-pi-types'
+import { type Interface, type InterfaceConfig, type InterfaceRuntime } from '@maanp/types'
 import { ref, watch } from 'vue'
 import { VBtn, VCard, VCardActions, VCardSubtitle, VCardText, VCardTitle } from 'vuetify/components'
 

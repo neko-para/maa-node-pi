@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { InterfaceId, InterfaceInfo } from 'maa-node-pi-types'
+import type { InterfaceId, InterfaceInfo } from '@maanp/types'
 import { onMounted, ref } from 'vue'
 import {
   VBtn,
