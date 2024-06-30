@@ -34,6 +34,9 @@ importers:
         specifier: ^10.0.0
         version: 10.0.0
     devDependencies:
+      '@maanp/types':
+        specifier: workspace:*
+        version: link:../types
       '@tsconfig/node20':
         specifier: ^20.1.4
         version: 20.1.4
@@ -43,9 +46,15 @@ importers:
       '@types/uuid':
         specifier: ^10.0.0
         version: 10.0.0
-      maa-node-pi-types:
-        specifier: workspace:*
-        version: link:../types
+      typescript:
+        specifier: ^5.5.2
+        version: 5.5.2
+
+  pkgs/pi:
+    devDependencies:
+      '@tsconfig/node20':
+        specifier: ^20.1.4
+        version: 20.1.4
       typescript:
         specifier: ^5.5.2
         version: 5.5.2
@@ -64,15 +73,15 @@ importers:
 
   pkgs/render:
     devDependencies:
+      '@maanp/types':
+        specifier: workspace:*
+        version: link:../types
       '@vitejs/plugin-vue':
         specifier: ^5.0.5
         version: 5.0.5(vite@5.3.1(@types/node@20.14.9))(vue@3.4.30(typescript@5.5.2))
       '@vue/tsconfig':
         specifier: ^0.5.1
         version: 0.5.1
-      maa-node-pi-types:
-        specifier: workspace:*
-        version: link:../types
       material-design-icons-iconfont:
         specifier: ^6.7.0
         version: 6.7.0

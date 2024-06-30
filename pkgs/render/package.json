@@ -1,10 +1,10 @@
 {
-  "name": "maa-node-pi-render",
+  "name": "@maanp/render",
   "type": "module",
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.0.5",
     "@vue/tsconfig": "^0.5.1",
-    "maa-node-pi-types": "workspace:*",
+    "@maanp/types": "workspace:*",
     "material-design-icons-iconfont": "^6.7.0",
     "typescript": "^5.5.2",
     "vite": "^5.3.1",

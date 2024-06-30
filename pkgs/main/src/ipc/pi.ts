@@ -1,7 +1,7 @@
+import { InterfaceId, InterfaceInfo } from '@maanp/types'
 import { dialog } from 'electron'
 import { existsSync } from 'fs'
 import * as fs from 'fs/promises'
-import { InterfaceId, InterfaceInfo } from 'maa-node-pi-types'
 import * as path from 'path'
 import { v4 } from 'uuid'
 

@@ -3,7 +3,7 @@ import {
   type InterfaceConfig,
   type InterfaceId,
   type InterfaceInfo
-} from 'maa-node-pi-types'
+} from '@maanp/types'
 import { type WatchStopHandle, ref, watch } from 'vue'
 
 import { debounce } from '../utils/debounce'

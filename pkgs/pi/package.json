@@ -1,5 +1,5 @@
 {
-  "name": "@maanp/types",
+  "name": "@maanp/pi",
   "main": "src/main.ts",
   "devDependencies": {
     "@tsconfig/node20": "^20.1.4",

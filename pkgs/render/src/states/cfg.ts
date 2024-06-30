@@ -1,4 +1,4 @@
-import type { GlobalConfig } from 'maa-node-pi-types/src/cfg'
+import type { GlobalConfig } from '@maanp/types/src/cfg'
 import { ref, watch } from 'vue'
 
 import { debounce } from '../utils/debounce'

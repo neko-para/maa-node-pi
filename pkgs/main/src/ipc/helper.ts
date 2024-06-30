@@ -1,5 +1,5 @@
+import { InvokeMain, NotifyRender } from '@maanp/types'
 import { ipcMain } from 'electron'
-import { InvokeMain, NotifyRender } from 'maa-node-pi-types'
 
 import { mainWindow } from '../window'
 

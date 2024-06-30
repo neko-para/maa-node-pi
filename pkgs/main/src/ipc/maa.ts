@@ -1,5 +1,5 @@
+import { InterfaceId } from '@maanp/types'
 import * as maa from '@nekosu/maa-node'
-import { InterfaceId } from 'maa-node-pi-types'
 
 import { IpcHandle, IpcNotify } from './helper'
 import { getProjectDir } from './pi'

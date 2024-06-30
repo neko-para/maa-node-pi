@@ -1,1 +1,1 @@
-declare const ipc: import('maa-node-pi-types').IpcDecl
+declare const ipc: import('@maanp/types').IpcDecl
