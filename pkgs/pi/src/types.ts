@@ -1,9 +1,9 @@
 import type * as maa from '@nekosu/maa-node'
 
 export type ProjectInterface = {
-  controller?: {
-    name?: string
-    type?: 'Adb' | 'Win32'
+  controller: {
+    name: string
+    type: 'Adb' | 'Win32'
     adb?: {
       touch?: number
       key?: number
@@ -11,7 +11,7 @@ export type ProjectInterface = {
       config?: unknown
     }
     win32?: {
-      method?: 'Find' | 'Search' | 'Cursor' | 'Desktop' | 'Foreground'
+      method: 'Find' | 'Search' | 'Cursor' | 'Desktop' | 'Foreground'
       class_name?: string
       window_name?: string
       touch?: number
@@ -19,22 +19,22 @@ export type ProjectInterface = {
       screencap?: number
     }
   }[]
-  resource?: {
-    name?: string
-    path?: string[]
+  resource: {
+    name: string
+    path: string[]
   }[]
-  task?: {
-    name?: string
-    entry?: string
+  task: {
+    name: string
+    entry: string
     param?: unknown
     option?: string[]
   }[]
   option?: Record<
     string,
     {
-      cases?: {
-        name?: string
-        param?: unknown
+      cases: {
+        name: string
+        param: unknown
       }[]
       default_case?: string
     }
@@ -42,14 +42,14 @@ export type ProjectInterface = {
   recognizer?: Record<
     string,
     {
-      exec_path?: string
+      exec_path: string
       exec_param?: string[]
     }
   >
   action?: Record<
     string,
     {
-      exec_path?: string
+      exec_path: string
       exec_param?: string[]
     }
   >
@@ -80,11 +80,10 @@ export type ProjectInterfaceConfig = {
 
 export type ProjectInterfaceRuntimeParam = {
   controller_param:
-    | null
     | ({ ctype: 'adb' } & maa.AdbInfo)
     | {
         ctype: 'win32'
-        hwnd: string
+        hwnd: maa.Win32Hwnd
         controller_type: number
       }
   resource_path: string[]

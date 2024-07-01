@@ -20,18 +20,30 @@ export const ProjectInterfaceFileName = 'interface.json'
 export const ProjectInterfaceConfigFileName = 'config/maa_pi_config.json'
 
 export class ProjectInterfaceData {
-  data: ProjectInterface = {}
+  data: ProjectInterface = {
+    controller: [],
+    resource: [],
+    task: []
+  }
+
+  reset() {
+    this.data = {
+      controller: [],
+      resource: [],
+      task: []
+    }
+  }
 
   async load(dir: string) {
     const file = path.join(dir, ProjectInterfaceFileName)
     if (!existsSync(file)) {
-      this.data = {}
+      this.reset()
       return
     }
     try {
       this.data = JSON.parse(await fs.readFile(file, 'utf8'))
     } catch (_) {
-      this.data = {}
+      this.reset()
     }
   }
 
@@ -45,6 +57,12 @@ export class ProjectInterfaceData {
       return null
     } else {
       return ProjectInterfaceSchema.errors ?? []
+    }
+  }
+
+  validateOrReset() {
+    if (this.validate() !== null) {
+      this.reset()
     }
   }
 }
