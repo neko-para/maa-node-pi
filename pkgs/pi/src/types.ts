@@ -58,22 +58,24 @@ export type ProjectInterface = {
 }
 
 export type ProjectInterfaceConfig = {
-  controller?: {
-    name?: string
-    type?: 'Adb' | 'Win32'
+  controller: {
+    name: string
+    type: 'Adb' | 'Win32'
   }
   adb?: {
     adb_path?: string
     address?: string
     config?: unknown
   }
-  win32?: {}
-  resource?: string
-  task?: {
-    name?: string
+  win32?: {
+    hwnd?: maa.Win32Hwnd
+  }
+  resource: string
+  task: {
+    name: string
     option?: {
-      name?: string
-      value?: string
+      name: string
+      value: string
     }[]
   }[]
 }
